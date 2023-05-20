@@ -1,6 +1,5 @@
 from database import engine
-
-from models.sellers import Sellers, Base
+from models.employees import Employees, Base
 
 
 ''' Create all table'''
