@@ -1,11 +1,12 @@
 from sqlalchemy import Column, String, Boolean
+from sqlalchemy_serializer import SerializerMixin
 
 try:
     from database import Base
 except:
     from ..database import Base
     
-class Employees(Base):
+class Employees(Base, SerializerMixin):
     __tablename__ = 'employees'
 
     id     = Column(String, primary_key=True) 
