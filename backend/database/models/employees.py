@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Boolean
+from sqlalchemy import Column, String, Integer
 from sqlalchemy_serializer import SerializerMixin
 
 try:
@@ -9,7 +9,8 @@ except:
 class Employees(Base, SerializerMixin):
     __tablename__ = 'employees'
 
-    id     = Column(String, primary_key=True) 
+    id     = Column(Integer, primary_key=True, nullable = False) 
+
     email  = Column(String)
     gender = Column(String)
     first_name = Column(String)
