@@ -1,0 +1,33 @@
+version: '3'
+services:
+  python:
+    build:
+      context: ./backend/
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - ./backend/:/backend/
+    ports:
+      - 3000:3000
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: mydatabase
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  nodejs:
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile.nodejs
+    restart: always
+    volumes:
+      - ./frontend/:/frontend/
+    ports:
+      - 8000:8000
