@@ -20,12 +20,12 @@ services:
       POSTGRES_PASSWORD: mypassword
       POSTGRES_DB: mydatabase
     volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./backend/database/init.sql:/docker-entrypoint-initdb.d/init.sql
 
   nodejs:
     build:
       context: ./frontend/
-      dockerfile: Dockerfile.nodejs
+      dockerfile: Dockerfile
     restart: always
     volumes:
       - ./frontend/:/frontend/
