@@ -7,10 +7,10 @@ def getEmployee(id):
     employee = session.query(Employees).filter_by(id = id).one()
     return employee.to_dict()
 
-@hug.get('all')
+@hug.get('')
 def allEmployee():
     employees = session.query(Employees).all()
-    return employees.to_dict()
+    return [employee.to_dict() for employee in employees]
 
 @hug.post('')
 def addEmployee(body):
