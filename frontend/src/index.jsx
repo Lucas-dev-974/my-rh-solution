@@ -1,8 +1,12 @@
 /* @refresh reload */
 import { render } from 'solid-js/web';
+import { Router, Route, Routes } from "@solidjs/router";
 
 import './index.css';
-import App from './App';
+import Dashboard from './views/dashboard/Dashboard';
+import Navbar from './layout/Navbar';
+import NoPage from './views/404'
+import EmployeeSheet from './views/EmployeeSheet'
 
 const root = document.getElementById('root');
 
@@ -12,4 +16,16 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
   );
 }
 
-render(() => <App />, root);
+render(() =><>
+  
+  <Router>
+    <Navbar />
+    <Routes>
+      <Route path="/" component={Dashboard} />
+      <Route path="/employee/:id" component={EmployeeSheet} />
+      <Route path={"/*"} component={NoPage} />
+    </Routes>
+    
+  </Router>
+  </> 
+, root);
