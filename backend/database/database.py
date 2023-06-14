@@ -10,7 +10,8 @@ except:
     
 
 ''' Create engine and session communicate with database '''
-engine  = create_engine('postgresql://' + getConfig('user') + ':' + getConfig('password') + '@localhost/' + getConfig('database') + '', echo=True)
+engine  = create_engine('postgresql://' + getConfig('USER') + ':' + getConfig('PASSWORD')
+                        + '@localhost:5434/' + getConfig('DATABASE') + '', echo=True)
 session = sessionmaker(bind=engine)
 session = session()
 
