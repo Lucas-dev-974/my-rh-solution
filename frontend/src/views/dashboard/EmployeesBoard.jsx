@@ -4,14 +4,26 @@ import EmployeeItem from "./EmployeeItem"
 
 export const [selected, setSelected] = createSignal([])
 export const addItemToSelect = (item) => {
+  let isSelected = selected().forEach(item => {
+    return 'ok'
+  })
+
+  console.log('isSelected', isSelected);
+
   setSelected([...selected(), item] )
+  console.log('items: ', selected());
 }
+
 export const removeItemFromSelected = (item) => {
   const items = selected().filter(_item => _item.id != item.id)
+  console.log('items: ', selected());
   setSelected(items)
 }
 
-export const [mainSelectRef, setMainSelectRef] = createSignal(null)
+createEffect(() => {
+  console.log(selected());
+})
+export const [globalSelect, setGlobalSelect] = createSignal(false)
 export const [employees, setEmployees] = createSignal([])
 
 export const removeEmployee = (item) => {
@@ -20,8 +32,6 @@ export const removeEmployee = (item) => {
 }
 
 export default function () {
-    
-
     createEffect(async () => {
         const data = await request('employee', 'GET', {})
         setEmployees(data)
@@ -41,7 +51,8 @@ export default function () {
                       name="comments"
                       type="checkbox"
                       className="h-3 w-3 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                      ref={setMainSelectRef}
+                      onChange={() => setGlobalSelect((bool) => !bool)}
+                      value={globalSelect()}
                     />
                     Prénom
                   </th>

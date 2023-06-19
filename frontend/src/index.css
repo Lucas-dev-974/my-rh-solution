@@ -21,11 +21,11 @@ code {
   background-color: var(--dark-gray);
   height: 100vh;
   color: white;
+}
 
-  > section {
-    width: 95%;
-    margin: 0 auto;
-  }
+#root > section {
+  width: 95%;
+  margin: 0 auto;
 }
 
 @screen md {
@@ -58,4 +58,9 @@ code {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #323232;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
 }

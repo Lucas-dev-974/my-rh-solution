@@ -1,20 +1,40 @@
-import { createEffect } from 'solid-js';
-import {mainSelectRef, removeEmployee} from './EmployeesBoard'
+import { createEffect, createSignal, on } from 'solid-js';
+import { addItemToSelect, removeItemFromSelected, removeEmployee, globalSelect } from './EmployeesBoard'
 import request from '../../services/request';
 
-
 export default function (props) {
+    const [selected, setSelected] = createSignal(false)
+    let selectRef
+
     const employee = props.item
-    createEffect(() => {
-        mainSelectRef().addEventListener('change', () => {
-            console.log('okok');
-        })
-    })
+    employee.selected = selected
+
+    createEffect(
+        on(
+            globalSelect,
+            () => {
+                if(globalSelect() == true){
+                    setSelected(true)
+                    selectRef.checked = true
+                    addItemToSelect (employee)
+                }else{
+                    selectRef.checked = false
+                    setSelected(false)
+                    removeItemFromSelected(employee)
+                }
+                // console.log('ook', selected(), globalSelect())
+                
+            }
+        )
+    )
+
+    
 
     const OnClickDelete = async () => {
-        const response = await request('employee/' + employee.id, 'DELETE', {})
+        await request('employee/' + employee.id, 'DELETE', {})
         removeEmployee(employee)
     }
+
     return  <tr key={employee.email}>
         <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium  sm:pl-0 flex items-center gap-2">
             <input
@@ -22,6 +42,19 @@ export default function (props) {
                 aria-describedby="comments-description"
                 name="comments"
                 type="checkbox"
+                onChange={() => {
+                    // console.log(employee.selected());
+                    if(employee.selected == false){
+                        removeItemFromSelected(employee)
+                        setSelected(false)
+                    }
+                    else {
+                        addItemToSelect (employee)
+                        setSelected(true)
+                    }
+                }}
+                ref={selectRef}
+                value={employee.selected()}
                 className="h-3 w-3 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
             />
         {employee.first_name}
