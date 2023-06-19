@@ -22,8 +22,6 @@ export default function (props) {
                     setSelected(false)
                     removeItemFromSelected(employee)
                 }
-                // console.log('ook', selected(), globalSelect())
-                
             }
         )
     )

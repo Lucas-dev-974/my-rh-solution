@@ -64,3 +64,15 @@ code {
   width: 80%;
   margin: 0 auto;
 }
+
+.text-dark {
+  color: #323232;
+}
+
+#employee-sheet > div {
+  display: flex;
+  margin: 10px 0;
+}
+#employee-sheet > div > label {
+  width: 150px;
+}
