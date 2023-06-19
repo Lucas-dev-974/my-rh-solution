@@ -1,4 +1,3 @@
-import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
@@ -9,8 +8,8 @@ except:
     from .getConf import getConfig
 
 
-connection_url = os.environ.get("CONNECTION_URL")
-print(connection_url)
+connection_url = getConfig("CONNECTION_URL")
+
 if connection_url is None:
     connection_url = (
         "postgresql://"
