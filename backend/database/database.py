@@ -9,7 +9,7 @@ except:
 
 
 connection_url = getConfig("CONNECTION_URL")
-print(connection_url)
+
 # if connection_url is None:
 #     connection_url = (
 #         "postgresql://"
@@ -22,8 +22,8 @@ print(connection_url)
 #     )
 
 
-# engine = create_engine(connection_url)
+engine = create_engine(connection_url)
 
-# session = sessionmaker(bind=engine)
-# session = session()
-# Base = declarative_base()
+session = sessionmaker(bind=engine)
+session = session()
+Base = declarative_base()
