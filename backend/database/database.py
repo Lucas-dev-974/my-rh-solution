@@ -10,16 +10,16 @@ except:
 
 connection_url = getConfig("CONNECTION_URL")
 
-# if connection_url is None:
-#     connection_url = (
-#         "postgresql://"
-#         + getConfig("USER")
-#         + ":"
-#         + getConfig("PASSWORD")
-#         + "@localhost:5434/"
-#         + getConfig("DATABASE")
-#         + ""
-#     )
+if connection_url is None:
+    connection_url = (
+        "postgresql://"
+        + getConfig("USER")
+        + ":"
+        + getConfig("PASSWORD")
+        + "@localhost:5434/"
+        + getConfig("DATABASE")
+        + ""
+    )
 
 
 engine = create_engine(connection_url)
