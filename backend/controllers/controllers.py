@@ -1,6 +1,7 @@
 import hug
 from database.database import session
 from database.models import Employees
+import json
 
 
 @hug.get("/{id}")
@@ -17,6 +18,7 @@ def allEmployee():
 
 @hug.post("")
 def addEmployee(body):
+    body = json.loads(body)
     email = body.get("email")
     gender = body.get("gender")
     first_name = body.get("first_name")
@@ -41,8 +43,9 @@ def addEmployee(body):
     return email
 
 
-@hug.patch("")
+@hug.put("")
 def updateEmployee(body):
+    body = json.loads(body)
     id = body.get("id")
     email = body.get("email")
     gender = body.get("gender")
