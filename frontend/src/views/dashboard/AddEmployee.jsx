@@ -1,5 +1,6 @@
 import { Show, createSignal } from "solid-js";
 import request from "../../services/request";
+import { addEmployeeToList } from "./EmployeesBoard";
 
 export default function () {
   const [open, setOpen] = createSignal(false);
@@ -17,7 +18,14 @@ export default function () {
   }
 
   async function addEmployee() {
-    await request("employee", "POST", JSON.stringify(employee));
+    const response = await request(
+      "employee",
+      "POST",
+      JSON.stringify(employee)
+    );
+    addEmployeeToList(response);
+
+    toggleModal();
   }
 
   return (
