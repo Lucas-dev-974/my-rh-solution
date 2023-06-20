@@ -28,19 +28,19 @@ def addEmployee(body):
 
     id = session.query(Employees).count()
 
-    session.add(
-        Employees(
-            id=id,
-            email=email,
-            gender=gender,
-            first_name=first_name,
-            last_name=last_name,
-            phone_number=phone_number,
-            email_personnal=email_personnal,
-        )
+    employee = Employees(
+        id=id,
+        email=email,
+        gender=gender,
+        first_name=first_name,
+        last_name=last_name,
+        phone_number=phone_number,
+        email_personnal=email_personnal,
     )
+
+    session.add(employee)
     session.commit()
-    return email
+    return employee.to_dict()
 
 
 @hug.put("")
@@ -81,4 +81,4 @@ def deleteEmployee(id):
     if employee:
         employee.delete()
         session.commit()
-    return "Retourne true | false"
+    return True
