@@ -38,3 +38,45 @@ Docker-compose
 ​
 
 Vous pouvez utiliser les images officielles
+
+# Setup frontend
+
+    cd frontend
+    npm install 
+    npm run dev
+
+Se rendre sur l'url http://localhost:3000/
+
+# Setup backend 
+    
+    cd backend
+    py -m venv .venv
+## Lancer l'environement virtuel
+    
+- Linux
+
+        source .venv/bin/activate
+          
+- Windows
+
+        .venv/Script/activate.bat
+
+## Installation des dépendances
+
+    pip install -r requirements.txt
+
+## Mise en place des var d'environement
+Sous linux se rendre dans le fichier .venv/bin/activate et rajouter à la fin du fichier
+
+    export CONNECTION_URL=postgresql://user:password@host:port/database
+
+Ne pas ouiblié de remplacer les chaine user, password, host, port & database
+
+## Lancer une migration et peuplé la BDD avec des données du CSV
+
+    py database/migration.py
+    py database/fill_database.py
+
+## Lancer le serveur 
+
+    hug -f server.py
