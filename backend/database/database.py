@@ -11,15 +11,7 @@ except:
 connection_url = getConfig("CONNECTION_URL")
 
 if connection_url is None:
-    connection_url = (
-        "postgresql://"
-        + getConfig("USER")
-        + ":"
-        + getConfig("PASSWORD")
-        + "@localhost:5434/"
-        + getConfig("DATABASE")
-        + ""
-    )
+    raise Exception("Veuillez spécifié l'utrl d conneion à la bdd")
 
 
 engine = create_engine(connection_url)
