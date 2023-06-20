@@ -1,7 +1,12 @@
 import notification from "./notification"
-
 export default async function request(url, method, data, headers = null){
-    const host = 'http://127.0.0.1:8000/api/'
+    const mode = location.host.includes('localhost') ? 'dev' : 'prod' 
+
+    // Define backend host
+    let host = ""
+    if(mode == "dev") host = 'http://localhost:8000/api/'
+    else host = 'http://apirh.lelu0920.odns.fr/api/'
+
     let body = {}
 
     if(method != 'GET'){
